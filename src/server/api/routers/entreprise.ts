@@ -4,6 +4,21 @@ import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
 import { StatusEnum } from "@prisma/client";
 
 export const entrepriseRouter = createTRPCRouter({
+  findEntreprise: protectedProcedure.query(async ({ ctx }) => {
+    return await ctx.prisma.entreprise.findMany({
+      where: {
+        userId: ctx.auth.userId,
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        status: true,
+        logo: true,
+        createdAt: true,
+      },
+    });
+  }),
   findMessage: protectedProcedure
     .input(
       z.object({
