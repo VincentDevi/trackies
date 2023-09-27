@@ -6,7 +6,9 @@ export function EntrepriseTable() {
   const { data, isLoading, error } = api.entreprise.findEntreprise.useQuery();
   return (
     <>
-      <DataTable data={data ?? []} columns={entrepriseColumns} />
+      {isLoading && <p>Loading ...</p>}
+      {error && <p>something went wrong</p>}
+      {data && <DataTable data={data ?? []} columns={entrepriseColumns} />}
     </>
   );
 }
