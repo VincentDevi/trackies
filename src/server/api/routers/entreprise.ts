@@ -41,12 +41,14 @@ export const entrepriseRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string(),
+        description: z.string().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
       return await ctx.prisma.entreprise.create({
         data: {
           name: input.name,
+          description: input.description,
           userId: ctx.auth.userId,
           status: StatusEnum.OPEN,
         },

@@ -3,6 +3,7 @@ import { api } from "@/utils/api";
 
 export function useCreateEntreprise() {
   const { toast } = useToast();
+  const utils = api.useContext();
   return api.entreprise.createEntreprise.useMutation({
     onError: () => {
       toast({
@@ -11,6 +12,7 @@ export function useCreateEntreprise() {
       });
     },
     onSuccess: () => {
+      void utils.entreprise.findEntreprise.invalidate();
       toast({
         title: "Entreprise successfully created",
         variant: "success",
