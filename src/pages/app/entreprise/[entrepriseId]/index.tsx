@@ -1,7 +1,5 @@
-export default function Entretpise() {
-  return (
-    <main>
-      <h1>Entreprise Page</h1>
-    </main>
-  );
+import { EntrepriseLayout } from "@/ui-lib/layouts/entreprise-layout";
+
+export default function Entretprise() {
+  return <EntrepriseLayout nav={<></>}>Entreprise Page</EntrepriseLayout>;
 }
