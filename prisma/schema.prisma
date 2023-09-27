@@ -10,33 +10,35 @@ generator client {
 
 model Entreprise {
   id        String     @id @default(cuid())
+  name      String
   userId    String
   status    StatusEnum
   logo      String?
   message   Message[]
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
 }
 
 model Message {
-  id           String     @id @default(cuid())
+  id           String      @id @default(cuid())
   entrepriseId String
-  entreprise   Entreprise @relation(fields: [entrepriseId], references: [id])
+  entreprise   Entreprise  @relation(fields: [entrepriseId], references: [id])
   userId       String
   screenSchot  String?
-  type MessageEnum
+  type         MessageEnum
   createdAt    DateTime
   updatedAt    DateTime
 
   @@index([entrepriseId])
 }
+
 enum MessageEnum {
   FIRSTCONTACT
   EXCHANGE
   REJECTION
 }
+
 enum StatusEnum {
-  FIRST
-  PROGRESS
+  OPEN
   CLOSED
 }
