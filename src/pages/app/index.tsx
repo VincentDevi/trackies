@@ -1,7 +1,5 @@
+import { DashboardLayout } from "@/ui-lib/layouts/dashboard-layout";
+
 export default function Dashboard() {
-  return (
-    <main>
-      <h1>Dashboard</h1>
-    </main>
-  );
+  return <DashboardLayout nav={<></>}>Dashboard Layout</DashboardLayout>;
 }
