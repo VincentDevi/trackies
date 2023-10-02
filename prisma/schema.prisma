@@ -12,8 +12,10 @@ model Entreprise {
   id          String     @id @default(cuid())
   name        String
   description String?
+  site        String
+  post        String?
   userId      String
-  status      StatusEnum
+  status      StatusEnum @default(EMPTY)
   logo        String?
   message     Message[]
   createdAt   DateTime   @default(now())
@@ -27,6 +29,7 @@ model Message {
   userId       String
   screenSchot  String?
   type         MessageEnum
+  date         DateTime
   createdAt    DateTime
   updatedAt    DateTime
 
@@ -40,6 +43,7 @@ enum MessageEnum {
 }
 
 enum StatusEnum {
+  EMPTY
   OPEN
   CLOSED
 }

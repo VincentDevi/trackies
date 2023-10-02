@@ -20,6 +20,11 @@ import { useCreateEntreprise } from "@/features/entreprise/hooks/create-entrepri
 const schema = z.object({
   name: z.string().min(1, { message: "This field is mandatory" }),
   description: z.string().optional(),
+  site: z
+    .string()
+    .min(1, { message: "This field is mandatory" })
+    .url({ message: "This must be a valid url" }),
+  post: z.string().url().optional(),
 });
 export function EntrepriseCreateDialog() {
   const { mutate } = useCreateEntreprise();
@@ -34,6 +39,8 @@ export function EntrepriseCreateDialog() {
       mutate({
         name: values.name,
         description: values.description,
+        site: values.site,
+        post: values.post,
       });
     });
   }
@@ -51,9 +58,31 @@ export function EntrepriseCreateDialog() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>
+                    Name <span className="text-red-500">*</span>{" "}
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder="Name" {...field} text="" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="site"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Website <span className="text-red-500">*</span>{" "}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Website"
+                      type="url"
+                      {...field}
+                      text=""
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -64,7 +93,7 @@ export function EntrepriseCreateDialog() {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Description</FormLabel>
                   <FormControl>
                     <Input placeholder="Description" {...field} text="" />
                   </FormControl>
@@ -72,9 +101,26 @@ export function EntrepriseCreateDialog() {
                 </FormItem>
               )}
             />
-            <DialogClose>
+            <FormField
+              control={form.control}
+              name="post"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Post</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Post" type="url" {...field} text="" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {form.formState.isValid ? (
+              <DialogClose>
+                <Button type="submit">Submit</Button>
+              </DialogClose>
+            ) : (
               <Button type="submit">Submit</Button>
-            </DialogClose>
+            )}
           </form>
         </Form>
       </DialogContent>

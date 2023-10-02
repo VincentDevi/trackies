@@ -13,6 +13,8 @@ export const entrepriseRouter = createTRPCRouter({
         id: true,
         name: true,
         description: true,
+        site: true,
+        post: true,
         status: true,
         logo: true,
         createdAt: true,
@@ -42,6 +44,8 @@ export const entrepriseRouter = createTRPCRouter({
       z.object({
         name: z.string(),
         description: z.string().optional(),
+        site: z.string().url(),
+        post: z.string().url().optional(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -49,8 +53,9 @@ export const entrepriseRouter = createTRPCRouter({
         data: {
           name: input.name,
           description: input.description,
+          site: input.site,
+          post: input.post,
           userId: ctx.auth.userId,
-          status: StatusEnum.OPEN,
         },
       });
     }),
