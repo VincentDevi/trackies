@@ -1,6 +1,8 @@
 import { type StatusEnum } from "@prisma/client";
 import { type ColumnDef } from "@tanstack/react-table";
 import {
+  ActionDropDown,
+  ActionsMenu,
   Badge,
   Button,
   DropdownMenu,
@@ -13,6 +15,8 @@ import {
 } from "@/ui-lib";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
+import { api } from "@/utils/api";
+import { useDeleteEntreprise } from "../../hooks/delete-entreprise";
 
 type EntrepriseMessage = {
   id: string;
@@ -58,26 +62,11 @@ export const entrepriseColumns: ColumnDef<EntrepriseMessage>[] = [
     header: "Actions",
     cell: ({ row }) => {
       const entreprise = row.original;
-      return (
-        <>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem>
-                <Link href={`/app/entreprise/${entreprise.id}`}>
-                  View Entreprise
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </>
-      );
+      const { mutate } = useDeleteEntreprise();
+      const actions: ActionsMenu = [
+        { title: "Delete", onclick: () => mutate({ id: [entreprise.id] }) },
+      ];
+      return <ActionDropDown actions={actions} />;
     },
   },
 ];
