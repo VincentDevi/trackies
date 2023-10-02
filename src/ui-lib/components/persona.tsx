@@ -1,8 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { ReactNode } from "react";
 
 type Props = {
   url?: string;
-  fallback: string;
+  fallback: ReactNode;
   text: string;
   subText?: string;
 };
@@ -16,9 +17,11 @@ export function Persona({ url, fallback, text, subText }: Props) {
           <AvatarFallback>{fallback}</AvatarFallback>
         </Avatar>
         <div>
-          <p className="text-sm font-medium leading-none">{text}</p>
+          <p className="text-base font-semibold leading-none text-gray-500">
+            {text}
+          </p>
           {subText ?? (
-            <p className="text-sm text-muted-foreground">{subText}</p>
+            <p className="text-sm font-light text-gray-300 ">{subText}</p>
           )}
         </div>
       </div>
