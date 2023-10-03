@@ -6,10 +6,9 @@ type Props = {
 };
 export function DashboardLayout({ children, nav }: Props) {
   return (
-    <>
-      <header></header>
-      <nav>{nav}</nav>
-      <main>{children}</main>
-    </>
+    <div className="flex h-screen w-screen">
+      <nav className="h-screen w-[15%]">{nav}</nav>
+      <main className="w-[85%]">{children}</main>
+    </div>
   );
 }

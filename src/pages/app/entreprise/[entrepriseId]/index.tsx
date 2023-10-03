@@ -1,5 +1,7 @@
 import { MessageCreateDialog } from "@/features/message/components/message-create-dialog";
 import { EntrepriseMessageTable } from "@/features/message/components/table/entreprise-message-table";
+import { DefaultNav } from "@/features/nav/default-nav";
+import { DashboardLayout } from "@/ui-lib/layouts/dashboard-layout";
 import { EntrepriseLayout } from "@/ui-lib/layouts/entreprise-layout";
 import { useRouter } from "next/router";
 
@@ -7,7 +9,7 @@ export default function Entretprise() {
   const router = useRouter();
   const { entrepriseId } = router.query;
   return (
-    <EntrepriseLayout nav={<></>}>
+    <DashboardLayout nav={<DefaultNav />}>
       <div className="flex flex-col gap-0 px-10 pt-6">
         <h2 className="text-4xl font-bold text-gray-700">
           Message related to your entreprise
@@ -24,6 +26,6 @@ export default function Entretprise() {
           <EntrepriseMessageTable entrepriseId={entrepriseId as string} />
         </div>
       </div>
-    </EntrepriseLayout>
+    </DashboardLayout>
   );
 }

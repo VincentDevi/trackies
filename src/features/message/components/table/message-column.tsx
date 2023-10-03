@@ -74,7 +74,7 @@ export const messageColumns: ColumnDef<Message>[] = [
       const actions: ActionsMenu = [
         {
           title: "Delete",
-          onclick: () => mutate({ id: [row.original.entrepriseId] }),
+          onclick: () => mutate({ id: [row.original.id] }),
         },
       ];
       return <ActionDropDown actions={actions} />;

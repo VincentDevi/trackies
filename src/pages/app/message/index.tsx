@@ -1,8 +1,10 @@
 import { MessageTable } from "@/features/message/components/table/message-table";
+import { DefaultNav } from "@/features/nav/default-nav";
+import { DashboardLayout } from "@/ui-lib/layouts/dashboard-layout";
 
 export default function MessagesPage() {
   return (
-    <>
+    <DashboardLayout nav={<DefaultNav />}>
       <div className="flex flex-col gap-0 px-10 pt-6">
         <h2 className="text-4xl font-bold text-gray-700">Messages</h2>
         <h3 className="text-2xl font-medium text-gray-500">
@@ -15,6 +17,6 @@ export default function MessagesPage() {
           <MessageTable />
         </div>
       </div>
-    </>
+    </DashboardLayout>
   );
 }
