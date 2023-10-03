@@ -13,7 +13,7 @@ import {
 import { useDeleteEntreprise } from "../../hooks/delete-entreprise";
 import Link from "next/link";
 
-type EntrepriseMessage = {
+type Entreprise = {
   id: string;
   name: string;
   description: string | null;
@@ -24,7 +24,7 @@ type EntrepriseMessage = {
   createdAt: Date;
 };
 
-export const entrepriseColumns: ColumnDef<EntrepriseMessage>[] = [
+export const entrepriseColumns: ColumnDef<Entreprise>[] = [
   {
     accessorKey: "name",
     header: "Name",

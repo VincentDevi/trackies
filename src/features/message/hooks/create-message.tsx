@@ -1,10 +1,10 @@
-import { useToast } from "@/ui-lib/components/use-toast";
+import { useToast } from "@/ui-lib";
 import { api } from "@/utils/api";
 
-export function useEditEntreprise() {
+export function useCreateMessage(id: string) {
   const { toast } = useToast();
   const utils = api.useContext();
-  return api.entreprise.editEntreprise.useMutation({
+  return api.message.createMessage.useMutation({
     onError: () => {
       toast({
         title: "Something went wrong",
@@ -12,7 +12,7 @@ export function useEditEntreprise() {
       });
     },
     onSuccess: () => {
-      utils.entreprise.findEntreprise.invalidate();
+      utils.message.findEntrepriseMessage.invalidate({ entrepriseId: id });
       toast({
         title: "Entrepise successfully updated",
         variant: "success",

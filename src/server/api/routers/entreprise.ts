@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { StatusEnum } from "@prisma/client";
 
 export const entrepriseRouter = createTRPCRouter({
   findEntreprise: protectedProcedure.query(async ({ ctx }) => {
